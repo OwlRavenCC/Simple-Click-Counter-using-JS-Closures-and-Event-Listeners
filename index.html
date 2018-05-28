@@ -24,31 +24,28 @@
     </style>
 
     <script>
-
+      //Data in JSON format
       $(document).ready(function () {
-        var cats = [{
-              'name' : 'Eddie',
-              'image' : 'cat1.jpg'
-            },
-            {
-              'name' : 'Pasa',
-              'image' : 'cat2.jpg'
-            },
-            {
-              'name' : 'Violet',
-              'image' : 'cat3.jpg'
-            },
-            {
-              'name' : 'Ronron',
-              'image' : 'cat4.jpg'
-            },
-             {
-              'name' : 'Dominga',
-              'image' : 'cat5.jpg'
-            }
+        var cats = [
+          {
+            'name': 'Eddie',
+            'image': 'cat1.jpg'
+          }, {
+            'name': 'Pasa',
+            'image': 'cat2.jpg'
+          }, {
+            'name': 'Violet',
+            'image': 'cat3.jpg'
+          }, {
+            'name': 'Ronron',
+            'image': 'cat4.jpg'
+          }, {
+            'name': 'Dominga',
+            'image': 'cat5.jpg'
+          }
         ];
 
-        for (var i = 0; i < cats.length; i++){
+        for (var i = 0; i < cats.length; i++) {
           var name = cats[i].name;
           var image = cats[i].image;
           var count = 0;
@@ -59,29 +56,29 @@
           var t = document.createTextNode(name);
           elem.appendChild(t);
 
-          elem.addEventListener('click', (function(nameCopy, imageCopy, countCopy){
-            return function(){
-                countCopy++;
-                $(".display").text(nameCopy);
-                $(".image-cat").attr("src", imageCopy) ;
-                $(".display-count").text(countCopy );
+          elem.addEventListener('click', (function (nameCopy, imageCopy, countCopy) {
+            return function () {
+              countCopy++;
+              $(".display").text(nameCopy);
+              $(".image-cat").attr("src", imageCopy);
+              $(".display-count").text(countCopy);
             };
           })(name, image, count));
 
           $('#catslist').append(elem);
         }
       });
-
     </script>
 
   </head>
   <body>
     <div class="container">
       <ul class="list-group" id="catslist"></ul>
-      <div class="display"></div><br>
-      <img class="image-cat"  width="300" src="" >
+      <div class="display"></div>
       <br>
-      <di class="display-count"></div>
+      <img class="image-cat" width="300" src="">
+      <br>
+      <div class="display-count"></div>
 
     </div>
   </body>

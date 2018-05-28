@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Cat Clicket</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      .container {
+        padding-top: 200px;
+        text-align: center;
+      }
+      .container img {
+        margin: auto;
+        display: inline-block;
+      }
+      .display-count {
+        margin: auto;
+        display: inline-block;
+        font-size: 40px;
+        font-weight: bolder;
+        font-family: 'Helvetica';
+      }
+    </style>
+
+    <script>
+
+      $(document).ready(function () {
+        var cats = [{
+              'name' : 'Eddie',
+              'image' : 'cat1.jpg'
+            },
+            {
+              'name' : 'Pasa',
+              'image' : 'cat2.jpg'
+            },
+            {
+              'name' : 'Violet',
+              'image' : 'cat3.jpg'
+            },
+            {
+              'name' : 'Ronron',
+              'image' : 'cat4.jpg'
+            },
+             {
+              'name' : 'Dominga',
+              'image' : 'cat5.jpg'
+            }
+        ];
+
+        for (var i = 0; i < cats.length; i++){
+          var name = cats[i].name;
+          var image = cats[i].image;
+          var count = 0;
+
+          var elem = document.createElement("li");
+          $(elem).addClass('list-group-item');
+
+          var t = document.createTextNode(name);
+          elem.appendChild(t);
+
+          elem.addEventListener('click', (function(nameCopy, imageCopy, countCopy){
+            return function(){
+                countCopy++;
+                $(".display").text(nameCopy);
+                $(".image-cat").attr("src", imageCopy) ;
+                $(".display-count").text(countCopy );
+            };
+          })(name, image, count));
+
+          $('#catslist').append(elem);
+        }
+      });
+
+    </script>
+
+  </head>
+  <body>
+    <div class="container">
+      <ul class="list-group" id="catslist"></ul>
+      <div class="display"></div><br>
+      <img class="image-cat"  width="300" src="" >
+      <br>
+      <di class="display-count"></div>
+
+    </div>
+  </body>
+</html>

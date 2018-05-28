@@ -31,7 +31,7 @@
             'name': 'Eddie',
             'image': 'cat1.jpg'
           }, {
-            'name': 'Pasa',
+            'name': 'Raven',
             'image': 'cat2.jpg'
           }, {
             'name': 'Violet',
@@ -40,7 +40,7 @@
             'name': 'Ronron',
             'image': 'cat4.jpg'
           }, {
-            'name': 'Dominga',
+            'name': 'Sally',
             'image': 'cat5.jpg'
           }
         ];
@@ -60,7 +60,7 @@
             return function () {
               countCopy++;
               $(".display").text(nameCopy);
-              $(".image-cat").attr("src", imageCopy);
+              $(".image-cat").attr("src", "img/" + imageCopy);
               $(".display-count").text(countCopy);
             };
           })(name, image, count));

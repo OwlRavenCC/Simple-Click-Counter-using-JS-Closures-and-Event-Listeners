@@ -1,0 +1,15 @@
+.container {
+  padding-top: 200px;
+  text-align: center;
+}
+.container img {
+  margin: auto;
+  display: inline-block;
+}
+.display-count {
+  margin: auto;
+  display: inline-block;
+  font-size: 40px;
+  font-weight: bolder;
+  font-family: 'Helvetica';
+}

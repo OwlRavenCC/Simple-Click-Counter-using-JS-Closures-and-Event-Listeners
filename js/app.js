@@ -1,23 +1,28 @@
 /* ======= Model ====== */
-
+//Put your data here in JSON Format, I used a name, image, and a variable to store the clicks.
 var model = {
     currentCat: null,
     cats: [
       {
         name: 'Eddie',
-        image: 'cat1.jpg'
+        image: 'cat1.jpg',
+        clickCount : 0
       }, {
         name: 'Raven',
-        image: 'cat2.jpg'
+        image: 'cat2.jpg',
+        clickCount : 0
       }, {
         name: 'Violet',
-        image: 'cat3.jpg'
+        image: 'cat3.jpg',
+        clickCount : 0
       }, {
         name: 'Ronron',
-        image: 'cat4.jpg'
+        image: 'cat4.jpg',
+        clickCount : 0
       }, {
         name: 'Sally',
-        image: 'cat5.jpg'
+        image: 'cat5.jpg',
+        clickCount : 0
       }
     ]
 };
@@ -27,6 +32,10 @@ var model = {
 var controller = {
     init: function(){
       model.currentCat = model.cats[0];
+
+      viewList.init();
+      ViewDisplay.init();
+
     },
 
     getCurrentCat: function(){
@@ -35,7 +44,7 @@ var controller = {
 
     getCats: function(){
       return model.cats;
-    }
+    },
 
     setCurrentCat: function(cat){
       model.currentCat = cat;
@@ -43,7 +52,7 @@ var controller = {
 
     incrementCounter: function(){
       model.currentCat.clickCount++;
-      catView.render();
+      ViewDisplay.render();
     }
 };
 
@@ -56,7 +65,7 @@ var ViewDisplay = {
     this.image = $('.image-cat');
     this.count = $('.display-count');
 
-    this.image.on('click', function(e) {
+    this.image.on('click', function() {
       controller.incrementCounter();
     });
 
@@ -66,13 +75,14 @@ var ViewDisplay = {
   render: function(){
     var currentCat = controller.getCurrentCat();
     this.name.text(currentCat.name);
-    this.image.attr('src') = currentCat.image;
+    this.image.attr('src','img/' + currentCat.image) ;
+    this.count.text(currentCat.clickCount);
   }
 
 };
 
 
-viewList = {
+var viewList = {
   init: function(){
     this.catlist = $('#catslist');
     this.render();
@@ -80,39 +90,31 @@ viewList = {
 
   render: function(){
     var cats = controller.getCats();
-
     this.catlist.empty();
+
+    for (var i = 0; i < cats.length; i++){
+      var cat = cats[i];
+
+      var elem = document.createElement("li");
+      $(elem).addClass('list-group-item');
+
+      $(elem).on('click', function() {
+        controller.incrementCounter();
+      });
+
+      elem.textContent = cat.name;
+//Here I used a IFFE (Immediately-invoked function expression ) to avoid replacing the counter at the end of the loop.
+      $(elem).on('click', (function(catCopy) {
+        return function() {
+          controller.setCurrentCat(catCopy);
+          ViewDisplay.render();
+        };
+      })(cat));
+
+      this.catlist.append(elem);
+
+    };
   }
 };
 
-
-
-
-
-
-
-$(document).ready(function () {
-
-  for (var i = 0; i < cats.length; i++) {
-    var name = cats[i].name;
-    var image = cats[i].image;
-    var count = 0;
-
-    var elem = document.createElement("li");
-    $(elem).addClass('list-group-item');
-
-    var t = document.createTextNode(name);
-    elem.appendChild(t);
-
-    elem.addEventListener('click', (function (nameCopy, imageCopy, countCopy) {
-      return function () {
-        countCopy++;
-        $(".display").text(nameCopy);
-        $(".image-cat").attr("src", "img/" + imageCopy);
-        $(".display-count").text(countCopy);
-      };
-    })(name, image, count));
-
-    $('#catslist').append(elem);
-  }
-});
+controller.init();

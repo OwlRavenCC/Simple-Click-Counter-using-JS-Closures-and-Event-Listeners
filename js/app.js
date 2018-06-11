@@ -35,6 +35,7 @@ var controller = {
 
       viewList.init();
       ViewDisplay.init();
+      adminPanel.init();
 
     },
 
@@ -92,6 +93,7 @@ var viewList = {
     var cats = controller.getCats();
     this.catlist.empty();
 
+
     for (var i = 0; i < cats.length; i++){
       var cat = cats[i];
 
@@ -108,12 +110,29 @@ var viewList = {
         return function() {
           controller.setCurrentCat(catCopy);
           ViewDisplay.render();
+
         };
       })(cat));
 
       this.catlist.append(elem);
 
     };
+  }
+};
+
+
+var adminPanel = {
+  init: function(){
+    this.activator = $('#admin-button');
+    this.panel = $('#admin-control');
+    this.render();
+  },
+
+  render: function(){
+    var panel = this.panel;
+    this.activator.on('click', function(){
+      panel.toggle('slow');
+    });
   }
 };
 

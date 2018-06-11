@@ -12,7 +12,17 @@
   font-family: 'Helvetica';
 }
 
+@media only screen and(max-width: 420px){
+  .display-count {
+    margin-top: 5%;
+  }
+}
+
 .display-name{
   font-size: 16px;
   font-weight: bold;
+}
+
+.toggle-hide{
+  display: none;
 }

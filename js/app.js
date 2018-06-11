@@ -5,23 +5,23 @@ var model = {
     cats: [
       {
         name: 'Eddie',
-        image: 'cat1.jpg',
+        image: 'img/cat1.jpg',
         clickCount : 0
       }, {
         name: 'Raven',
-        image: 'cat2.jpg',
+        image: 'img/cat2.jpg',
         clickCount : 0
       }, {
         name: 'Violet',
-        image: 'cat3.jpg',
+        image: 'img/cat3.jpg',
         clickCount : 0
       }, {
         name: 'Ronron',
-        image: 'cat4.jpg',
+        image: 'img/cat4.jpg',
         clickCount : 0
       }, {
         name: 'Sally',
-        image: 'cat5.jpg',
+        image: 'img/cat5.jpg',
         clickCount : 0
       }
     ]
@@ -36,6 +36,7 @@ var controller = {
       viewList.init();
       ViewDisplay.init();
       adminPanel.init();
+      adminInput.init();
 
     },
 
@@ -68,6 +69,7 @@ var ViewDisplay = {
 
     this.image.on('click', function() {
       controller.incrementCounter();
+      adminInput.render();
     });
 
     this.render();
@@ -76,7 +78,7 @@ var ViewDisplay = {
   render: function(){
     var currentCat = controller.getCurrentCat();
     this.name.text(currentCat.name);
-    this.image.attr('src','img/' + currentCat.image) ;
+    this.image.attr('src', currentCat.image) ;
     this.count.text(currentCat.clickCount);
   }
 
@@ -102,6 +104,7 @@ var viewList = {
 
       $(elem).on('click', function() {
         controller.incrementCounter();
+        adminInput.render();
       });
 
       elem.textContent = cat.name;
@@ -110,7 +113,6 @@ var viewList = {
         return function() {
           controller.setCurrentCat(catCopy);
           ViewDisplay.render();
-
         };
       })(cat));
 
@@ -130,10 +132,44 @@ var adminPanel = {
 
   render: function(){
     var panel = this.panel;
+
     this.activator.on('click', function(){
       panel.toggle('slow');
     });
   }
+};
+
+
+var adminInput = {
+  init: function(){
+    this.nameadmin = $('#admin-cat-name');
+    this.imageadmin = $('#admin-cat-image');
+    this.numberadmin = $('#admin-cat-number');
+
+    this.submitBtn =  $('#admin-submit');
+    this.cancelBtn =  $('#admin-cancel');
+
+    this.cancelBtn.on('click',function(){
+      adminInput.render();
+    });
+    this.render();
+  },
+
+  render: function(){
+    var currentCat = controller.getCurrentCat();
+    this.nameadmin.val(currentCat.name);
+    this.imageadmin.val(currentCat.image);
+    this.numberadmin.val(currentCat.clickCount);
+
+    this.submitBtn.on('click', function(){
+      currentCat.name = adminInput.nameadmin.val();
+      currentCat.image = adminInput.imageadmin.val();
+      currentCat.clickCount = adminInput.numberadmin.val();
+      viewList.render();
+      ViewDisplay.render();
+    });
+  }
+
 };
 
 controller.init();

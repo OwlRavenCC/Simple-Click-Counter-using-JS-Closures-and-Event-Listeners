@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-5">
           <h3 class="display-name"></h3>
-          <img class="image-cat" width="300" src="">
+          <img class="image-cat img-thumbnail" width="300" src="">
         </div>
         <div class="col-md-2">
           <h3 class="display-count"></h3>
@@ -28,22 +28,22 @@
         <button class="btn btn-info" type="button" id="admin-button">Admin</button>
       <div id="admin-control" class="row justify-content-md-center">
         <div class="col-md-5 ">
-        <form>
+
           <div class="form-group">
             <label for="admin-cat-name">Name:</label>
             <input  class="form-control" type="text" id="admin-cat-name" value="">
           </div>
           <div class="form-group">
             <label for="admin-cat-image">Image:</label>
-            <input class="form-control" type="url" id="admin-cat-image" value="">
+            <input class="form-control" type="text" id="admin-cat-image" value="">
           </div>
           <div class="form-group">
             <label for="admin-cat-number">Counter:</label>
             <input class="form-control" type="number" id="admin-cat-number" value="">
           </div>
-          <button type="submit" class="btn btn-danger">Cancel</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+          <button id="admin-cancel" class="btn btn-danger">Cancel</button>
+          <button id="admin-submit" class="btn btn-primary">Submit</button>
+
         </div>
       </div>
     </div> <!--container -->

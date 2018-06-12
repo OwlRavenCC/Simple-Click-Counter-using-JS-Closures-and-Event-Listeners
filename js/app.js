@@ -69,7 +69,6 @@ var ViewDisplay = {
 
     this.image.on('click', function() {
       controller.incrementCounter();
-      adminInput.render();
     });
 
     this.render();
@@ -102,23 +101,19 @@ var viewList = {
       var elem = document.createElement("li");
       $(elem).addClass('list-group-item');
 
-      $(elem).on('click', function() {
-        controller.incrementCounter();
-        adminInput.render();
-      });
 
       elem.textContent = cat.name;
 //Here I used a IFFE (Immediately-invoked function expression ) to avoid replacing the counter at the end of the loop.
       $(elem).on('click', (function(catCopy) {
         return function() {
           controller.setCurrentCat(catCopy);
-          ViewDisplay.render();
+          controller.incrementCounter();
         };
       })(cat));
-
       this.catlist.append(elem);
 
     };
+
   }
 };
 
@@ -127,6 +122,8 @@ var adminPanel = {
   init: function(){
     this.activator = $('#admin-button');
     this.panel = $('#admin-control');
+    this.panel.toggle(0);
+
     this.render();
   },
 
@@ -150,7 +147,7 @@ var adminInput = {
     this.cancelBtn =  $('#admin-cancel');
 
     this.cancelBtn.on('click',function(){
-      adminInput.render();
+      adminPanel.panel.toggle('slow');
     });
     this.render();
   },
@@ -161,12 +158,15 @@ var adminInput = {
     this.imageadmin.val(currentCat.image);
     this.numberadmin.val(currentCat.clickCount);
 
-    this.submitBtn.on('click', function(){
+    this.submitBtn.on('click',function(){
       currentCat.name = adminInput.nameadmin.val();
       currentCat.image = adminInput.imageadmin.val();
-      currentCat.clickCount = adminInput.numberadmin.val();
-      viewList.render();
-      ViewDisplay.render();
+      currentCat.clickCount= adminInput.numberadmin.val();
+
+      viewList.init();
+      ViewDisplay.init();
+
+      adminPanel.panel.toggle('slow');
     });
   }
 

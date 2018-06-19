@@ -1,6 +1,9 @@
-/* ======= Model ====== */
-//Put your data here in JSON Format, I used a name, image, and a variable to store the clicks.
-var model = {
+/* ======= ViewModel ====== */
+var CatModelmodel = function(cats){
+  this.currentCat = ko.obvervablearray;
+  this.cats = 
+
+
     currentCat: null,
     cats: [
       {

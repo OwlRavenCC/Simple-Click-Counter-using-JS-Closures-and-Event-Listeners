@@ -13,7 +13,9 @@
         <h1>Cat Clicker Pro </h1>
       <div class="row">
         <div class="col-md-5">
-          <ul class="list-group" id="catslist"></ul>
+          <ul class="list-group" id="catslist" data-bind="foreach: cats">
+            <li class="list-group-item" data-bind="text: name"> </li>
+          </ul>
         </div>
         <div class="col-md-5">
           <h3 class="display-name"></h3>

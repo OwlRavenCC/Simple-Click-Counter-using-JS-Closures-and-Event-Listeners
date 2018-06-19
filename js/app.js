@@ -22,33 +22,35 @@ var CatModel = function(){
       image: 'img/cat5.jpg',
       clickCount : 0
     }
-  ]),
-  this.currentCat = ko.observable(this.cats[1]);
+  ]);
+  this.currentCat = ko.observable(this.cats()[0]);
 };
 
-/* ======= View ====== */
+ko.applyBindings(new CatModel());
 
-var ViewDisplay = {
-  init: function(){
-    this.name = $('.display-name');
-    this.image = $('.image-cat');
-    this.count = $('.display-count');
-
-    this.image.on('click', function() {
-      controller.incrementCounter();
-    });
-
-    this.render();
-  },
-
-  render: function(){
-    var currentCat = controller.getCurrentCat();
-    this.name.text(currentCat.name);
-    this.image.attr('src', currentCat.image) ;
-    this.count.text(currentCat.clickCount);
-  }
-
-};
+// /* ======= View ====== */
+//
+// var ViewDisplay = {
+//   init: function(){
+//     this.name = $('.display-name');
+//     this.image = $('.image-cat');
+//     this.count = $('.display-count');
+//
+//     this.image.on('click', function() {
+//       controller.incrementCounter();
+//     });
+//
+//     this.render();
+//   },
+//
+//   render: function(){
+//     var currentCat = controller.getCurrentCat();
+//     this.name.text(currentCat.name);
+//     this.image.attr('src', currentCat.image) ;
+//     this.count.text(currentCat.clickCount);
+//   }
+//
+// };
 
 //
 // var viewList = {

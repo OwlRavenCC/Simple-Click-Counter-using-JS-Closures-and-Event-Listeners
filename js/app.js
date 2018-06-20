@@ -1,5 +1,6 @@
 /* ======= ViewModel ====== */
-var CatModel = function(){
+var catModel = function(){
+  var self = this;
   this.cats = ko.observableArray([
     {
       name: 'Eddie',
@@ -22,11 +23,17 @@ var CatModel = function(){
       image: 'img/cat5.jpg',
       clickCount : 0
     }
-  ]);
+  ]),
   this.currentCat = ko.observable(this.cats()[0]);
-};
 
-ko.applyBindings(new CatModel());
+  this.setCurrentCat = function(){
+    var index = self.cats().indexOf(this);
+    self.currentCat = ko.observable(self.cats()[index]);
+    alert(self.currentCat().name);
+  };
+
+};
+ko.applyBindings(new catModel());
 
 // /* ======= View ====== */
 //

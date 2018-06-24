@@ -1,7 +1,7 @@
 /* ======= ViewModel ====== */
 var catModel = function(){
   var self = this;
-  this.cats = ko.observableArray([
+  self.cats = ko.observableArray([
     {
       name: 'Eddie',
       image: 'img/cat1.jpg',
@@ -23,16 +23,17 @@ var catModel = function(){
       image: 'img/cat5.jpg',
       clickCount : 0
     }
-  ]),
-  this.currentCat = ko.observable(this.cats()[0]);
+  ]);
 
-  this.setCurrentCat = function(){
-    var index = self.cats().indexOf(this);
-    self.currentCat = ko.observable(self.cats()[index]);
-    alert(self.currentCat().name);
+  self.currentCat = ko.observable(self.cats()[0]);
+
+  self.showCat = function(indexValue){
+    self.currentCat(self.cats()[indexValue]);
   };
 
+
 };
+
 ko.applyBindings(new catModel());
 
 // /* ======= View ====== */

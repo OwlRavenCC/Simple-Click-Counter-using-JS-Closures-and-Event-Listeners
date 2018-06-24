@@ -13,16 +13,14 @@
         <h1>Cat Clicker Pro </h1>
       <div class="row">
         <div class="col-md-5">
-          <ul class="list-group" id="catslist" data-bind="foreach: cats">
-            <li class="list-group-item" >
-              <span data-bind="text: name"></span>
-              <button data-bind="click: $parent.setCurrentCat">Remove</button>
+          <ul class="list-group" data-bind="foreach: cats">
+            <li data-bind="text: $data.name, click: $parent.showCat.bind($data, $index())" class="list-group-item" >
             </li>
           </ul>
         </div>
         <div class="col-md-5">
           <h3 data-bind="text: currentCat().name" class="display-name"></h3>
-          <img data-bind="attr: {src: currentCat().image}" class="image-cat img-thumbnail" width="300" src="">
+          <img data-bind="attr: {'src': currentCat().image}" class="image-cat img-thumbnail" width="300" src="">
         </div>
         <div class="col-md-2">
           <h3 class="display-count"></h3>

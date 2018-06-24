@@ -14,42 +14,19 @@
       <div class="row">
         <div class="col-md-5">
           <ul class="list-group" data-bind="foreach: cats">
-            <li data-bind="text: $data.name, click: $parent.showCat.bind($data, $index())" class="list-group-item" >
+            <li data-bind="text: $data.name, click: function(indexValue) { $parent.showCat( $index(), indexValue)}" class="list-group-item" >
             </li>
           </ul>
         </div>
         <div class="col-md-5">
           <h3 data-bind="text: currentCat().name" class="display-name"></h3>
-          <img data-bind="attr: {'src': currentCat().image}" class="image-cat img-thumbnail" width="300" src="">
+          <img data-bind="attr: {'src': currentCat().image}, click: incrementCounter" class="image-cat img-thumbnail" width="300" src="">
         </div>
         <div class="col-md-2">
-          <h3 class="display-count"></h3>
+          <h3 data-bind="text: currentCount" class="display-count"></h3>
         </div>
       </div>
 
-      <hr>
-      <!--Control Panel UI -->
-        <button class="btn btn-info" type="button" id="admin-button">Admin</button>
-      <div id="admin-control" class="row justify-content-md-center">
-        <div class="col-md-5 ">
-
-          <div class="form-group">
-            <label for="admin-cat-name">Name:</label>
-            <input  class="form-control" type="text" id="admin-cat-name" value="">
-          </div>
-          <div class="form-group">
-            <label for="admin-cat-image">Image:</label>
-            <input class="form-control" type="text" id="admin-cat-image" value="">
-          </div>
-          <div class="form-group">
-            <label for="admin-cat-number">Counter:</label>
-            <input class="form-control" type="number" id="admin-cat-number" value="">
-          </div>
-          <button id="admin-cancel" class="btn btn-danger">Cancel</button>
-          <button id="admin-submit" class="btn btn-primary">Submit</button>
-
-        </div>
-      </div>
     </div> <!--container -->
     <footer class="footer">
       <div class="container">

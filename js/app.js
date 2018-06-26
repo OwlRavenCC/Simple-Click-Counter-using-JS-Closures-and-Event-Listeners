@@ -1,7 +1,8 @@
 /* ======= ViewModel ====== */
 var catModel = function(){
   var self = this;
-  self.cats = ko.observableArray([
+  //Example of how to declare observableArray
+  this.cats = ko.observableArray([
     {
       name: 'Eddie',
       image: 'img/cat1.jpg',
@@ -24,22 +25,32 @@ var catModel = function(){
       clickCount : 0
     }
   ]);
+//Example of how to access observableArray
+  this.currentCat = ko.observable(self.cats()[0]);
+  this.currentCount = ko.observable(self.currentCat().clickCount);
 
-  self.currentCat = ko.observable(self.cats()[0]);
-  self.currentCount = ko.observable(self.currentCat().clickCount);
 
-
-  self.showCat = function(indexValue){
+  this.showCat = function(indexValue){
     self.currentCat(self.cats()[indexValue]);
     self.incrementCounter();
   };
 
-  self.incrementCounter = function(){
-    var cat = self.currentCat();
-    cat.clickCount++;
-    var count = cat.clickCount;
-    self.currentCount(count);
+  this.incrementCounter = function(){
+    self.currentCat().clickCount++;
   };
+  //Example of how to use Computed observables
+  self.disclaimer = ko.computed(function(){
+    this.count = self.currentCat().clickCount;
+    if(this.count < 5){
+        return 'Baby Cat';
+    }else if (this.count < 10) {
+      return 'Teen Cat';
+    } else if (this.count < 15) {
+      return 'Adult Cat';
+    } else {
+      return 'Old Cat';
+    }
+  });
 };
 
 ko.applyBindings(new catModel());
